@@ -4,51 +4,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Modern Design</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS for Modern Design -->
+    <title>Daftar Buku</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CSS Inline -->
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f5f5f5;
+        font-family: 'Arial', sans-serif;
+        background-color: #f5f5f5;
         }
 
         .navbar {
-            background-color: #343a40;
+        background-color: white;
         }
 
         .navbar-brand,
         .nav-link {
-            color: #fff !important;
+        color: #343a40 !important;
         }
 
         .hero-section {
-            background: linear-gradient(135deg, #74ebd5 0%, #9face6 100%);
-            color: white;
-            height: 60vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
+        background: linear-gradient(135deg, #74ebd5 0%, #9face6 100%);
+        color: white;
+        height: 60vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
         }
 
         .hero-section h1 {
-            font-size: 4rem;
+        font-size: 4rem;
         }
 
-        .card {
-            border: none;
-            border-radius: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f0f0f0;
         }
 
         .footer {
-            background-color: #343a40;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 50px;
+        background-color: #343a40;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        margin-top: 50px;
         }
     </style>
 </head>
@@ -88,43 +98,33 @@
         </div>
     </div>
 
-    <!-- Main Content -->
+    <!-- Book Section -->
     <div class="container mt-5">
-        <div class="row text-center">
-            <div class="col-md-4 mb-4">
-                <div class="card p-4">
-                    <img src="https://via.placeholder.com/150" class="card-img-top rounded-circle mx-auto"
-                        alt="Feature 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Feature 1</h5>
-                        <p class="card-text">Discover amazing features and design simplicity.</p>
-                        <a href="#" class="btn btn-primary">Learn More</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card p-4">
-                    <img src="https://via.placeholder.com/150" class="card-img-top rounded-circle mx-auto"
-                        alt="Feature 2">
-                    <div class="card-body">
-                        <h5 class="card-title">Feature 2</h5>
-                        <p class="card-text">Built for performance and scalability.</p>
-                        <a href="#" class="btn btn-primary">Learn More</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card p-4">
-                    <img src="https://via.placeholder.com/150" class="card-img-top rounded-circle mx-auto"
-                        alt="Feature 3">
-                    <div class="card-body">
-                        <h5 class="card-title">Feature 3</h5>
-                        <p class="card-text">Effortlessly customizable and extensible.</p>
-                        <a href="#" class="btn btn-primary">Learn More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <h1>Book List</h1>
+
+        <!-- Membuat tabel untuk menampilkan informasi buku dalam bentuk baris dan kolom -->
+        <table>
+
+            <!-- Bagian ini adalah kepala tabel (header), yang menjelaskan kolom-kolom apa saja yang ada -->
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Kode ini akan mengambil setiap buku dari daftar $books dan menampilkannya satu per satu -->
+                @foreach ($books as $book)
+                <tr>
+                    <td>{{ $book['id'] }}</td> <!-- Menampilkan ID dari buku yang diambil -->
+                    <td>{{ $book['title'] }}</td> <!-- Menampilkan judul buku -->
+                    <td>{{ $book['author'] }}</td> <!-- Menampilkan nama pengarang buku -->
+                </tr>
+                <!-- foreach yaitu perulangan (looping) yang terus berjalan sampai semua buku dalam daftar $books ditampilkan -->
+                @endforeach
+            </tbody>
+        </table>
     </div>
 
     <!-- Footer -->
@@ -132,8 +132,8 @@
         <p>&copy; 2024 ModernSite. All rights reserved.</p>
     </footer>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Script JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

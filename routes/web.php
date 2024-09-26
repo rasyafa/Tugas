@@ -1,11 +1,18 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BookController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', function () {
-    return view('home');
-});
+// Baris ini membuat rute (jalur) untuk URL "/book".
+// Ketika mengunjungi halaman "/book" di browser,
+// PHP akan mencari controller yang bernama "BookController"
+// dan menjalankan fungsinya yang bernama "index".
+// Controller ini seperti "pengatur lalu lintas" yang memutuskan apa yang harus dilakukan
+// ketika seseorang membuka halaman "/book".
+// Selain itu, rute ini diberi nama "home", sehingga nanti kita bisa menggunakan nama ini
+// untuk merujuk ke rute "/book" lebih mudah di tempat lain dalam kode kita.
+Route::get('/book', [BookController::class, 'index'])->name('home');
