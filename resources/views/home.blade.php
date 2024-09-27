@@ -127,6 +127,22 @@
         </table>
     </div>
 
+    <!-- If message send succesly, print message -->
+    @if(session('message'))
+        <div class="alert alert-info alert-dismissible fade show d-flex align-items-center mt-3 mx-auto w-50" role="alert">
+            <!-- Bootstrap Icon (Optional) -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                class="bi bi-info-circle-fill me-2" viewBox="0 0 16 16">
+                <path
+                    d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-11.412-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 .966-.252 1.196-.598l.088-.416c-.2.266-.514.44-.87.44-.427 0-.654-.256-.516-.94l.738-3.468c.194-.897-.105-1.319-.808-1.319-.545 0-.966.252-1.196.598l-.088.416c.2-.266.514-.44.87-.44.427 0 .654.256.516.94l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 .966-.252 1.196-.598l.088-.416a.252.252 0 0 1-.204-.236l-.45-.083-.082-.38.287-2.29a.44.44 0 0 1 .533-.386z" />
+            </svg>
+            <div>
+                <strong>Message :</strong> {{ session('message') }}
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
     <!-- Footer -->
     <footer class="footer">
         <p>&copy; 2024 ModernSite. All rights reserved.</p>

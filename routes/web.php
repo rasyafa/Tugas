@@ -7,6 +7,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/book', [BookController::class, 'index'])->name('home');
+
+Route::get("/form", function () {
+    return view('form');
+});
+
+Route::post("/submit", [BookController::class, "form"]);
+
+// Penjelasan untuk line 10
 // Baris ini membuat rute (jalur) untuk URL "/book".
 // Ketika mengunjungi halaman "/book" di browser,
 // PHP akan mencari controller yang bernama "BookController"
@@ -15,4 +24,3 @@ Route::get('/', function () {
 // ketika seseorang membuka halaman "/book".
 // Selain itu, rute ini diberi nama "home", sehingga nanti kita bisa menggunakan nama ini
 // untuk merujuk ke rute "/book" lebih mudah di tempat lain dalam kode kita.
-Route::get('/book', [BookController::class, 'index'])->name('home');
