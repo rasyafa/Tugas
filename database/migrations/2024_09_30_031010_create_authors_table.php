@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('authors', function (Blueprint $table) {
             $table->id();
-            $table->integer("author_id")->unique();
             $table->string("author_name");
             $table->date("date_of_birth");
             $table->string("place_of_birth");
