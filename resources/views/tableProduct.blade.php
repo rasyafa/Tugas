@@ -5,42 +5,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <style>
-        table {
-            border-collapse: collapse;
-        }
-
-        th,
-        td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-    </style>
+    <title>Product List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 
 <body>
-    <table>
-        <tr>
-            {{-- Looping untuk setiap atribut yang ada di produk pertama --}}
-            {{-- Ini untuk membuat header tabel berdasarkan atribut produk --}}
-            @foreach ($Products->first()->getAttributes() as $key => $value)
-            {{-- $key adalah nama atribut, misalnya "nama" atau "harga" --}}
-            <th>{{ $key }}</th>
-            @endforeach
-        </tr>
-        {{-- Looping untuk setiap produk yang ada --}}
-        @foreach ($Products as $Product)
-        <tr>
-            {{-- Looping untuk setiap atribut yang ada di produk --}}
-            @foreach ($Product->getAttributes() as $key => $value)
-            {{-- $value adalah isi dari atribut, misalnya "Laptop" atau "1000000" --}}
-            <td>{{ $value }}</td>
-            @endforeach
-        </tr>
-        @endforeach
-    </table>
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Product List</h1>
+
+        <table class="table table-striped table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    @foreach ($Products->first()->getAttributes() as $key => $value)
+                    <th>{{ ucfirst($key) }}</th>
+                    @endforeach
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach ($Products as $Product)
+                <tr>
+                    @foreach ($Product->getAttributes() as $key => $value)
+                    <td>{{ $value }}</td>
+                    @endforeach
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
 </body>
 
 </html>
