@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class BookController extends Controller
 {
@@ -40,4 +41,25 @@ class BookController extends Controller
             // Redirect to home page
             return redirect('/book');
         }
+
+    public function store()
+        {
+            $Product = new Product();
+            $Product->nama_produk = "Laptop";
+            $Product->harga = 10000;
+            $Product->stok = 10;
+            $Product->deskripsi = "laptop murah";
+            $Product->save();
+
+            return "data sukses dikirim";
+        }
+
+    public function show()
+    {
+        // Mengambil semua data produk
+        $Products = Product::all();
+
+        // Mengembalikan data ke view "tableProduct"
+        return view('tableProduct', compact('Products'));
+    }
 }

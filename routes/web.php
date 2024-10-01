@@ -3,18 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', function () {return view('welcome');});
 Route::get('/book', [BookController::class, 'index'])->name('home');
-
-Route::get("/form", function () {
-    return view('form');
-});
-
+Route::get("/form", function () {return view('form');});
 Route::post("/submit", [BookController::class, "form"]);
-
+Route::get("/create", [BookController::class, "store"]);
+Route::get("/show", [BookController::class, "show"]);
 // Penjelasan untuk line 10
 // Baris ini membuat rute (jalur) untuk URL "/book".
 // Ketika mengunjungi halaman "/book" di browser,
