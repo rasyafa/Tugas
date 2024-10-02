@@ -46,20 +46,70 @@ class BookController extends Controller
         {
             $Product = new Product();
             $Product->nama_produk = "Laptop";
-            $Product->harga = 10000;
+            $Product->harga = 10_000_000;
             $Product->stok = 10;
             $Product->deskripsi = "laptop murah";
             $Product->save();
 
             return "data sukses dikirim";
         }
+    public function store2()
+        {
+            $Product = new Product();
+            $Product->nama_produk = "Handphone";
+            $Product->harga = 25_000_000;
+            $Product->stok = 70;
+            $Product->deskripsi = "Handphone murah";
+            $Product->save();
+
+            return "data sukses dikirim";
+        }
+    public function store3()
+        {
+            $Product = new Product();
+            $Product->nama_produk = "Ipad";
+            $Product->harga = 3_000_000;
+            $Product->stok = 40;
+            $Product->deskripsi = "Ipad murah";
+            $Product->save();
+
+            return "data sukses dikirim";
+        }
 
     public function show()
-    {
-        // Mengambil semua data produk
-        $Products = Product::all();
+        {
+            // Mengambil semua data produk
+            $Products = Product::all();
 
-        // Mengembalikan data ke view "tableProduct"
-        return view('tableProduct', compact('Products'));
-    }
+            // Mengembalikan data ke view "tableProduct"
+            return view('tableProduct', compact('Products'));
+        }
+
+    public function edit($id)
+        {
+            $Products = Product::findOrFail($id);
+
+            return view("editProduct", compact("Products"));
+        }
+
+    public function update(Request $request, $id)
+        {
+            $Product = Product::findOrFail($id);
+
+            $Product->nama_produk = $request->nama_produk;
+            $Product->harga = $request->harga;
+            $Product->stok = $request->stok;
+            $Product->deskripsi = $request->deskripsi;
+            $Product->save();
+
+            return redirect('/show');
+        }
+
+    public function destroy($id)
+        {
+            $Products = Product::findOrFail($id);
+            $Products->delete();
+
+            return redirect('/show');
+        }
 }
