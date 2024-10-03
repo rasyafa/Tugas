@@ -79,7 +79,7 @@ class BookController extends Controller
     public function show()
         {
             // Mengambil semua data produk
-            $Products = Product::all();
+            $Products = Product::Paginate(3);
 
             // Mengembalikan data ke view "tableProduct"
             return view('tableProduct', compact('Products'));

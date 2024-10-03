@@ -6,109 +6,118 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Daftar Produk</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f8f9;
-            color: #333;
-            margin: 0;
-            padding: 0;
+            background-color: #f5f5f5;
         }
 
         h2 {
-            text-align: center;
-            padding: 20px;
-            background-color: #e3f2fd;
-            color: #2196f3;
-            margin-top: 0;
-        }
-
-        table {
-            width: 80%;
-            margin: 20px auto;
-            border-collapse: collapse;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            background-color: white;
-        }
-
-        th,
-        td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #eee;
-        }
-
-        th {
-            background-color: #e0f7fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             font-weight: bold;
         }
 
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
+        .table-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
         }
 
-        button {
-            padding: 8px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.3s;
+        .table th {
+            background-color: #495057;
+            color: #fff;
         }
 
-        .edit-button {
-            background-color: #2196f3;
-            color: white;
+        .table-hover tbody tr:hover {
+            background-color: #f1f3f5;
         }
 
-        .edit-button:hover {
-            background-color: #1976d2;
+        .btn-edit {
+            background-color: #17a2b8;
+            color: #fff;
         }
 
-        .delete-button {
-            background-color: #f44336;
-            color: white;
+        .btn-edit:hover {
+            background-color: #138496;
         }
 
-        .delete-button:hover {
-            background-color: #d32f2f;
+        .btn-delete {
+            background-color: #e74c3c;
+            color: #fff;
+        }
+
+        .btn-delete:hover {
+            background-color: #c0392b;
+        }
+
+        .pagination {
+            margin-top: 20px;
+            justify-content: center;
         }
     </style>
 </head>
 
 <body>
-    <h2>Daftar Produk</h2>
-    <table border="1" cellpadding="10" cellspacing="0">
-        <thead>
-            <tr>
-                <th>Nama</th>
-                <th>Harga</th>
-                <th>Stok</th>
-                <th>Deskripsi</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($Products as $Product)
-            <tr>
-                <td>{{ $Product->nama_produk }}</td>
-                <td>{{ $Product->harga }}</td>
-                <td>{{ $Product->stok }}</td>
-                <td>{{ $Product->deskripsi }}</td>
-                <td>
-                    <form action="/Products/{{ $Product->id }}/edit" method="GET">
-                    <button type="submit" class="edit-button">Edit</button></form>
-                <br>
-                    <form action="/Products/{{ $Product->id }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="delete-button">Hapus</button>
-                    </form>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+
+    <div class="container my-5">
+        <h2 class="text-center text-dark py-3">Daftar Produk</h2>
+        <div class="table-container">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nama</th>
+                            <th scope="col">Harga</th>
+                            <th scope="col">Stok</th>
+                            <th scope="col">Deskripsi</th>
+                            <th scope="col">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($Products as $index => $Product)
+                        <tr>
+                            <th scope="row">{{ $index + $Products->firstItem() }}</th>
+                            <td>{{ $Product->nama_produk }}</td>
+                            <td>{{ $Product->harga }}</td>
+                            <td>{{ $Product->stok }}</td>
+                            <td>{{ $Product->deskripsi }}</td>
+                            <td>
+                                <div class="d-flex gap-2">
+                                    <form action="/Products/{{ $Product->id }}/edit" method="GET">
+                                        <button type="submit" class="btn btn-edit btn-sm">
+                                            <i class="fas fa-edit"></i> Edit
+                                        </button>
+                                    </form>
+                                    <form action="/Products/{{ $Product->id }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-delete btn-sm">
+                                            <i class="fas fa-trash-alt"></i> Hapus
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="d-flex justify-content-center">
+                {{ $Products->links() }}
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
