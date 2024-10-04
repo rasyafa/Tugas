@@ -1,24 +1,25 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BookController;
+use App\Http\Controllers\HomeController;
 
 Route::get('/', function () {return view('welcome');});
 //PART 1 & 2
-Route::get('/book', [BookController::class, 'index'])->name('home');
+Route::get('/book', [HomeController::class, 'index'])->name('home');
 // REQUEST
 Route::get("/form", function () {return view('form');});
-Route::post("/submit", [BookController::class, "form"]);
+Route::post("/submit", [HomeController::class, "form"]);
 // Eloquent CREATE
-Route::get("/create", [BookController::class, "store"]);
-Route::get("/create2", [BookController::class, "store2"]);
-Route::get("/create3", [BookController::class, "store3"]);
+Route::post("/create", [HomeController::class, "store"]);
 // Eloquent READ
-Route::get("/show", [BookController::class, "show"]);
+Route::get("/show", [HomeController::class, "show"]);
 // Eloquent untuk UPDATE & DELETE
-Route::get('/Products/{id}/edit', [BookController::class, 'edit']);
-Route::put('/Products/{id}', [BookController::class, 'update']);
-Route::delete('/Products/{id}', [BookController::class, 'destroy']);
+Route::get('/Products/{id}/edit', [HomeController::class, 'edit']);
+Route::put('/Products/{id}', [HomeController::class, 'update']);
+Route::delete('/Products/{id}', [HomeController::class, 'destroy']);
+// VALIDATOR
+Route::get("/input",[HomeController::class, "input"]);
+
 // Penjelasan untuk line 10
 // Baris ini membuat rute (jalur) untuk URL "/book".
 // Ketika mengunjungi halaman "/book" di browser,

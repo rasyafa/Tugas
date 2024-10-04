@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Support\Facades\Validator;
 
-class BookController extends Controller
+class HomeController extends Controller
 {
 
     public function index()
@@ -42,39 +43,28 @@ class BookController extends Controller
             return redirect('/book');
         }
 
-    public function store()
-        {
-            $Product = new Product();
-            $Product->nama_produk = "Laptop";
-            $Product->harga = 10_000_000;
-            $Product->stok = 10;
-            $Product->deskripsi = "laptop murah";
-            $Product->save();
+    public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'nama_produk' => 'required|string|max:255',
+            'harga' => 'required|numeric|min:2',
+            'stok' => 'required|integer|min:50',
+            'deskripsi' => 'nullable|string',
+        ]);
 
-            return "data sukses dikirim";
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
         }
-    public function store2()
-        {
-            $Product = new Product();
-            $Product->nama_produk = "Handphone";
-            $Product->harga = 25_000_000;
-            $Product->stok = 70;
-            $Product->deskripsi = "Handphone murah";
-            $Product->save();
 
-            return "data sukses dikirim";
-        }
-    public function store3()
-        {
-            $Product = new Product();
-            $Product->nama_produk = "Ipad";
-            $Product->harga = 3_000_000;
-            $Product->stok = 40;
-            $Product->deskripsi = "Ipad murah";
-            $Product->save();
+        $Product = new Product();
+        $Product->nama_produk = $request->nama_produk;
+                $Product->harga = $request->harga;
+                $Product->stok = $request->stok;
+                $Product->deskripsi = $request->deskripsi;
+        $Product->save();
 
-            return "data sukses dikirim";
-        }
+        return redirect('/show');
+    }
 
     public function show()
         {
@@ -112,4 +102,8 @@ class BookController extends Controller
 
             return redirect('/show');
         }
+
+    public function input(){
+        return view("inputProduct");
+    }
 }
