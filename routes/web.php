@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RelasiController;
 
 Route::get('/', function () {return view('welcome');});
 //PART 1 & 2
@@ -19,6 +20,10 @@ Route::put('/Products/{id}', [HomeController::class, 'update']);
 Route::delete('/Products/{id}', [HomeController::class, 'destroy']);
 // VALIDATOR
 Route::get("/input",[HomeController::class, "input"]);
+// Eloquent Relationship (One-to-One)
+Route::get("/ktp",[RelasiController::class, "index"]);
+Route::get('/pengguna/create',[RelasiController::class, 'create']);
+Route::post('/pengguna/store',[RelasiController::class, 'store']);
 
 // Penjelasan untuk line 10
 // Baris ini membuat rute (jalur) untuk URL "/book".
