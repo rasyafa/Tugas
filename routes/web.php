@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RelasiController;
+use App\Http\Controllers\SekolahController;
 
 Route::get('/', function () {return view('welcome');});
 //PART 1 & 2
@@ -24,7 +25,8 @@ Route::get("/input",[HomeController::class, "input"]);
 Route::get("/ktp",[RelasiController::class, "index"]);
 Route::get('/pengguna/create',[RelasiController::class, 'create']);
 Route::post('/pengguna/store',[RelasiController::class, 'store']);
-
+// Eloquent Relationship (Many-to-Many)
+Route::get("/sekolah", [SekolahController::class, "index"]);
 // Penjelasan untuk line 10
 // Baris ini membuat rute (jalur) untuk URL "/book".
 // Ketika mengunjungi halaman "/book" di browser,
