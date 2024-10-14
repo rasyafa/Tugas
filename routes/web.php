@@ -31,6 +31,7 @@ Route::get("/sekolah", [SekolahController::class, "index"]);
 // DomPDF
 Route::get('/download', [PdfController::class, 'generatePDF']);
 Route::get('/stream', [PdfController::class, 'streamPDF']);
+Route::get('/patients', [PdfController::class, 'index']);
 // Penjelasan untuk line 10
 // Baris ini membuat rute (jalur) untuk URL "/book".
 // Ketika mengunjungi halaman "/book" di browser,

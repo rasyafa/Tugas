@@ -37,21 +37,21 @@
         <thead>
             <tr>
                 <th>No.</th>
-                <th>Produk</th>
-                <th>Jumlah</th>
-                <th>Harga</th>
-                <th>Total</th>
+                <th>Pasien</th>
+                <th>Keluhan</th>
+                <th>Diagnosis</th>
+                <th>Tindakan</th>
             </tr>
         </thead>
         <tbody>
             <?php $no = 1; ?>
-            @foreach ($sales as $sale)
+            @foreach ($patients as $patient)
             <tr>
                 <td>{{ $no++ }}</td>
-                <td>{{ $sale['product'] }}</td>
-                <td>{{ $sale['quantity'] }}</td>
-                <td>Rp {{ number_format($sale['price'], 0, ',', '.') }}</td>
-                <td>Rp {{ number_format($sale['quantity'] * $sale['price'], 0, ',', '.') }}</td>
+                <td>{{ $patient->name }}</td>
+                <td>{{ $patient->complaint }}</td>
+                <td>{{ $patient->diagnosis }}</td>
+                <td>{{ $patient->action }}</td>
             </tr>
             @endforeach
         </tbody>
