@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\RelasiController;
 use App\Http\Controllers\SekolahController;
 
@@ -27,6 +28,9 @@ Route::get('/pengguna/create',[RelasiController::class, 'create']);
 Route::post('/pengguna/store',[RelasiController::class, 'store']);
 // Eloquent Relationship (Many-to-Many)
 Route::get("/sekolah", [SekolahController::class, "index"]);
+// DomPDF
+Route::get('/download', [PdfController::class, 'generatePDF']);
+Route::get('/stream', [PdfController::class, 'streamPDF']);
 // Penjelasan untuk line 10
 // Baris ini membuat rute (jalur) untuk URL "/book".
 // Ketika mengunjungi halaman "/book" di browser,
